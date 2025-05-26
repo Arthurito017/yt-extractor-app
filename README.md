@@ -23,5 +23,5 @@ Este é um sistema web que permite buscar, visualizar e baixar trechos personali
 1. Clone o repositório
 2. Instale as dependências no backend:
 
-   Feito com ☕ por Arthur Rodrigues
+## Feito com ☕ por Arthur Rodrigues
 
