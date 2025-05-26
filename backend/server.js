@@ -213,6 +213,16 @@ function parseDuration(duration) {
     return (parseInt(match[1]) || 0) * 3600 + (parseInt(match[2]) || 0) * 60 + (parseInt(match[3]) || 0);
 }
 
+const frontendPath = path.join(__dirname, 'frontend');
+
+app.use(express.static(frontendPath));
+
+// Rota fallback para SPA (caso o usuário acesse diretamente algum caminho)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(frontendPath, 'index.html'));
+});
+
+
 
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Servidor rodando em http://${getLocalIP()}:${PORT}`);
