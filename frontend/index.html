@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YT Extractor</title>
+    <link rel="icon" type="image/png" href="img/social.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Modal de Carregamento -->
+    <div id="loading-modal" class="modal">
+        <div class="spinner"></div>
+        <p>Carregando vídeos...</p>
+    </div>
+
+    <!-- Modal para Seleção de Download -->
+    <div id="download-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal()">&times;</span>
+            <h2>Selecionar Trecho para Download</h2>
+            <p>Escolha os minutos e segundos:</p>
+            <input type="text" id="start-time" placeholder="00:00" value="00:00" oninput="formatarTempoInput(this)">
+            <input type="text" id="end-time" placeholder="00:00" value="00:30" oninput="formatarTempoInput(this)">
+            <button onclick="confirmarDownload()">📥 Confirmar Download</button>
+        </div>
+    </div>
+
+    <!-- Modal para Assistir Vídeo -->
+    <div id="watch-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="fecharWatchModal()">&times;</span>
+            <h2>Assistir Vídeo</h2>
+            <iframe id="video-iframe" width="100%" height="315" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <img src="img/social.png" alt="Logo" style="max-width: 140px;" />
+        <h1>YT Extractor</h1>
+
+        <!-- Campo de pesquisa e filtros -->
+        <div class="search-filters">
+            <input type="text" id="search-input" placeholder="Buscar vídeos...">
+            <button onclick="buscarVideos()">Pesquisar</button>
+
+
+            <div class="filters">
+                <label>Inscritos Mín.</label>
+                <input type="number" id="min-subs" placeholder="0">
+
+                <label>Inscritos Máx.</label>
+                <input type="number" id="max-subs" placeholder="999999">
+
+                <label>Duração Mín.</label>
+                <input type="text" id="min-duration" placeholder="00:00" value="00:00"
+                    oninput="formatarTempoInput(this)">
+
+                <label>Duração Máx.</label>
+                <input type="text" id="max-duration" placeholder="00:00" value="00:00"
+                    oninput="formatarTempoInput(this)">
+
+                <label>Visualizações Mín.</label>
+                <input type="number" id="min-views" placeholder="0">
+
+                <label>Visualizações Máx.</label>
+                <input type="number" id="max-views" placeholder="999999999">
+
+                <label for="posted-within">Data de postagem:</label>
+                <select id="posted-within" onchange="buscarVideos(true)">
+                    <option value="0">Sem filtro</option>
+                    <option value="1">Últimas 24h</option>
+                    <option value="7">Últimos 7 dias</option>
+                    <option value="30">Últimos 30 dias</option>
+                </select>
+            </div>
+
+            <div class="col-md-12 col-lg-3">
+                <button onclick="limparFiltros()">Limpar Filtros</button>
+
+            </div>
+
+            <!-- 🔽 Ordenar por (invisível até carregar resultados) -->
+            <div id="order-container" style="display: none; margin-top: 20px;">
+                <label for="ordenar-por">Ordenar por:</label>
+                <select id="ordenar-por" onchange="ordenarVideos()">
+                    <option value="">-- Selecione --</option>
+                    <option value="recentes">Mais recentes</option>
+                    <option value="antigos">Mais antigos</option>
+                    <option value="views">Mais vistos</option>
+                </select>
+            </div>
+
+            <!-- Lista de resultados -->
+            <div id="video-results"></div>
+        </div>
+
+        <button id="load-more-btn" onclick="buscarVideos(false)"
+            style="display:none; margin: 20px auto; padding: 10px; font-size: 16px; background: #FF0000; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            🔄 Carregar mais vídeos
+        </button>
+
+        <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,387 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #181818;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #202020;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* 🔍 Estilização da área de pesquisa e filtros */
+.search-filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.search-filters input,
+.search-filters button {
+    width: 90%;
+    max-width: 400px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* 🔍 Botão de busca */
+.search-filters button {
+    background-color: #FF0000;
+    color: #ffff;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* 🔹 Organizando os filtros em duas colunas */
+.filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 10px;
+}
+
+.filters label {
+    text-align: right;
+    font-size: 14px;
+    color: white;
+    margin-right: 5px;
+}
+
+/* 🔹 Ajuste dos campos de entrada */
+.filters input {
+    width: 100%;
+    max-width: 120px;
+    text-align: center;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    font-size: 14px;
+    background: #282828;
+    color: white;
+}
+
+/* 📽 Layout dos vídeos */
+#video-results {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.video-card {
+    display: flex;
+    align-items: center;
+    background: #282828;
+    padding: 15px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 700px;
+    gap: 15px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.video-thumbnail {
+    width: 160px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.video-info {
+    text-align: left;
+    flex-grow: 1;
+    max-width: 500px;
+}
+
+.video-info h3 {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.video-info p {
+    font-size: 14px;
+    color: #b3b3b3;
+}
+
+/* Botões de ação */
+.video-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.video-buttons button {
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 140px;
+    text-align: center;
+}
+
+.view-button {
+    background-color: #FF0000;
+    color: black;
+}
+
+.download-button {
+    background-color: #1DB954;
+    color: white;
+}
+
+/* ⏳ Modal de Carregamento */
+#download-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #202020;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    z-index: 1000;
+    text-align: center;
+    width: 90%;
+    max-width: 400px;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -55%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+#download-modal input {
+    width: 80px;
+    padding: 8px;
+    text-align: center;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 10px;
+    background: #282828;
+    color: white;
+}
+
+#download-modal button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #FF0000;
+    font-weight: bold;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: white;
+}
+
+
+/* 📱 Responsividade */
+@media screen and (max-width: 600px) {
+    .filters {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .filters label {
+        text-align: center;
+    }
+
+    .video-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .video-buttons {
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+/* ⏳ Modal de Carregamento */
+#loading-modal {
+    display: none;
+    /* Oculto por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 1000;
+    color: white;
+    font-size: 18px;
+}
+
+.spinner {
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid #FF0000;
+    /* Dourado para destacar */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* 🎬 Modal para Assistir Vídeo */
+#watch-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #202020;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    z-index: 1000;
+    text-align: center;
+    width: 90%;
+    max-width: 600px;
+}
+
+#watch-modal iframe {
+    border-radius: 8px;
+}
+
+#watch-modal .close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 22px;
+    cursor: pointer;
+    color: white;
+}
+
+.watch-button {
+    background-color: #ff0000;
+    color: white;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 140px;
+}
+
+#order-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 0 20px;
+}
+
+#order-container label {
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#ordenar-por {
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #282828;
+    color: white;
+    border: 1px solid #444;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#ordenar-por:hover {
+    background-color: #333;
+}
+
+#ordenar-por option {
+    background-color: #202020;
+    color: white;
+}
+
+/* Estilo para o container da data de postagem (se quiser alinhar) */
+.filters label[for="posted-within"] {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: right;
+}
+
+/* Estilo para o select da data */
+#posted-within {
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #282828;
+    color: white;
+    border: 1px solid #444;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    width: 100%;
+    max-width: 140px;
+}
+
+/* Hover suave */
+#posted-within:hover {
+    background-color: #333;
+}
+
+/* Estilo para as opções do dropdown */
+#posted-within option {
+    background-color: #202020;
+    color: white;
+}
